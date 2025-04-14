@@ -32,8 +32,8 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
   cpu                      = "256"
   memory                   = "512"
 
-  task_role_arn            = aws_iam_role.ecs_task_role.arn
-  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn      = aws_iam_role.ecs_task_role.arn
+  execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
 
   container_definitions = jsonencode([
     {
@@ -94,15 +94,15 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
 }
 
 resource "aws_ecs_service" "flask_service" {
-  name            = "aalimsee-flask-service"
+  name            = "aaron-flask-service"
   cluster         = aws_ecs_cluster.flask_xray_cluster.id
   task_definition = aws_ecs_task_definition.flask_xray_taskdef.arn
   launch_type     = "FARGATE"
   desired_count   = 1
 
   network_configuration {
-    subnets          = ["subnet-xxxxxxxx", "subnet-yyyyyyyy"]  # Replace with your actual subnet IDs
-    security_groups  = ["sg-xxxxxxxx"]  # Replace with your ECS Service Security Group ID
+    subnets          = [aws_subnet.public.id]                # Replace with your actual subnet IDs
+    security_groups  = [aws_security_group.flask_service_sg] # Replace with your ECS Service Security Group ID
     assign_public_ip = true
   }
 
@@ -111,4 +111,10 @@ resource "aws_ecs_service" "flask_service" {
   }
 
   deployment_minimum_healthy_percent = 50
-  deployment_maximum_percent
+  deployment_maximum_percent         = 200
+
+  tags = {
+    Name        = "aaron-flask-service"
+    Environment = "dev"
+  }
+}

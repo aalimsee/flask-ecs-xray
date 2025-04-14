@@ -1,9 +1,6 @@
 
 
 
-
-
-
 name: Terraform Deployment
 
 # This will run every time we create push a commit to "main" branch.
@@ -42,3 +39,4 @@ jobs:
             TF_VAR_region: ${{ secrets.AWS_REGION }}
             TF_VAR_ecr_repo: ${{ secrets.ECR_REPOSITORY }}
             TF_VAR_image_tag: ${{ github.sha }}
+

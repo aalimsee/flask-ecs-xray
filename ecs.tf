@@ -101,8 +101,8 @@ resource "aws_ecs_service" "flask_service" {
   desired_count   = 1
 
   network_configuration {
-    subnets          = [aws_subnet.public.id]                # Replace with your actual subnet IDs
-    security_groups  = [aws_security_group.flask_service_sg] # Replace with your ECS Service Security Group ID
+    subnets          = [aws_subnet.public.id]                   # Replace with your actual subnet IDs
+    security_groups  = [aws_security_group.flask_service_sg.id] # Replace with your ECS Service Security Group ID
     assign_public_ip = true
   }
 

@@ -86,7 +86,7 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "/ecs/aaron-flask-xray-taskdef"
+          awslogs-group         = aws_cloudwatch_log_group.flask_log_group.name
           awslogs-region        = "us-east-1"
           awslogs-stream-prefix = "xray-sidecar"
         }
@@ -94,6 +94,17 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
     }
   ])
 }
+
+
+resource "aws_cloudwatch_log_group" "flask_log_group" {
+  name              = "/ecs/aaron-flask-xray-taskdef"
+  retention_in_days = 7
+
+  tags = {
+    Name = "flask-log-group"
+  }
+}
+
 
 resource "aws_ecs_service" "flask_service" {
   name            = "aaron-flask-service"

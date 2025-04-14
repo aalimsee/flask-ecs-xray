@@ -42,7 +42,8 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
       essential = true,
       portMappings = [
         {
-          containerPort = 8080
+          containerPort = 8080,
+          hostPort      = 8080,
           protocol      = "tcp"
         }
       ]
@@ -77,7 +78,8 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
       essential = false,
       portMappings = [
         {
-          containerPort = 2000
+          containerPort = 2000,
+          hostPort      = 2000,
           protocol      = "udp"
         }
       ]

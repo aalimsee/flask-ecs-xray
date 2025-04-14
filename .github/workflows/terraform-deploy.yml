@@ -40,3 +40,4 @@ jobs:
             TF_VAR_ecr_repo: ${{ secrets.ECR_REPOSITORY }}
             TF_VAR_image_tag: ${{ github.sha }}
 
+            

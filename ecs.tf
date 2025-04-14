@@ -37,9 +37,9 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
 
   container_definitions = jsonencode([
     {
-      name      = "flask-app"
-      image     = "<your_image_uri>"
-      essential = true
+      name      = "flask-app",
+      image     = "${var.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${var.ecr_repo}:${var.image_tag}",
+      essential = true,
       portMappings = [
         {
           containerPort = 8080
@@ -72,9 +72,9 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
       }
     },
     {
-      name      = "xray-sidecar"
-      image     = "amazon/aws-xray-daemon"
-      essential = false
+      name      = "xray-sidecar",
+      image     = "amazon/aws-xray-daemon",
+      essential = false,
       portMappings = [
         {
           containerPort = 2000

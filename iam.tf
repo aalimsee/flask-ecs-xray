@@ -21,6 +21,11 @@ resource "aws_iam_role_policy_attachment" "ecs_task_role_xray" {
   policy_arn = "arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess"
 }
 
+resource "aws_iam_role_policy_attachment" "ecs_task_role_secret" {
+  role       = aws_iam_role.ecs_task_role.name
+  policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
+}
+
 
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "aaron-ecs-xray-taskexecutionrole"

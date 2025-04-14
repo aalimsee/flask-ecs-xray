@@ -8,3 +8,14 @@ aws ecr create-repository \
   --region us-east-1
 ```
 
+# Create dev environment
+```
+gh api --method PUT -H "Accept: application/vnd.github+json" /repos/aalimsee/flask-ecs-xray/environments/dev
+```
+
+# Create secret variables in dev
+```
+gh secret set AWS_REGION -b"us-east-1" -r aalimsee/flask-ecs-xray --env dev
+gh secret set AWS_ACCOUNT_ID -b"255945442255" -r aalimsee/flask-ecs-xray --env dev
+gh secret set ECR_REPOSITORY -b"aaron-flask-xray-repo" -r aalimsee/flask-ecs-xray --env dev
+```

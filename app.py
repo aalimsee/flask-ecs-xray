@@ -18,7 +18,7 @@ XRayMiddleware(app, xray_recorder)
 @app.route("/")
 def index():
     return jsonify({
-        "message": "Hello from Flask!",
+        "message": "Hello from Flask, Aaron!",
         "app_config": app_config,
         "db_password": db_password
     })

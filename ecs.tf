@@ -60,7 +60,7 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
         },
         {
           name      = "MY_DB_PASSWORD"
-          valueFrom = "arn:aws:secretsmanager:us-east-1:255945442255:secret:aaron/db_password-jnecfFs"
+          valueFrom = "arn:aws:secretsmanager:us-east-1:255945442255:secret:aaron/db_password-jnecfF"
         }
       ],
       logConfiguration = {

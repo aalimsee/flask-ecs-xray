@@ -1,5 +1,12 @@
 # flask-ecs-xray
 
+# Assignment Screenshot
+![ECR](doc/ECR.png)
+
+![network](doc/flaskContainerNetwork.png)
+
+![Test result](doc/testingResults.png)
+
 # Create a private Amazon ECR repository (if missing)
 ```
 aws ecr create-repository \

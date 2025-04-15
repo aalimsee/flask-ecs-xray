@@ -1,6 +1,6 @@
 # flask-ecs-xray
 
-# Create a private Amazon ECR repository
+# Create a private Amazon ECR repository (if missing)
 ```
 aws ecr create-repository \
   --repository-name aaron-flask-xray-repo \

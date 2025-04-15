@@ -42,4 +42,3 @@ jobs:
           docker push $IMAGE_URI:latest
           docker push $IMAGE_URI:${{ github.sha }}
 
-

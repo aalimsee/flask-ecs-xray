@@ -25,6 +25,16 @@ resource "aws_ecs_cluster_capacity_providers" "flask_xray_capacity_providers" {
   }
 }
 
+# Fetch SSM Parameter (for MY_APP_CONFIG)
+data "aws_ssm_parameter" "app_config" {
+  name = "/aaron/config"
+}
+
+# Fetch Secrets Manager Secret (for MY_DB_PASSWORD)
+data "aws_secretsmanager_secret" "db_password" {
+  name = "aaron/db_password"
+}
+
 resource "aws_ecs_task_definition" "flask_xray_taskdef" {
   family                   = "aaron-flask-xray-taskdef"
   requires_compatibilities = ["FARGATE"]
@@ -56,11 +66,11 @@ resource "aws_ecs_task_definition" "flask_xray_taskdef" {
       secrets = [
         {
           name      = "MY_APP_CONFIG"
-          valueFrom = "arn:aws:ssm:us-east-1:255945442255:parameter/aaron/config"
+          valueFrom = data.aws_ssm_parameter.app_config.arn # "arn:aws:ssm:us-east-1:255945442255:parameter/aaron/config"
         },
         {
           name      = "MY_DB_PASSWORD"
-          valueFrom = "arn:aws:secretsmanager:us-east-1:255945442255:secret:aaron/db_password-jnecfF"
+          valueFrom = data.aws_secretsmanager_secret.db_password.arn # "arn:aws:secretsmanager:us-east-1:255945442255:secret:aaron/db_password-jnecfF"
         }
       ],
       logConfiguration = {

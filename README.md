@@ -8,6 +8,12 @@ aws ecr create-repository \
   --region us-east-1
 ```
 
+# Create Parameter Store and Secrets
+```
+aws ssm put-parameter --name "/aaron/config" --type "String" --value "MySSMConfig" --overwrite
+aws secretsmanager create-secret --name "aaron/db_password" --secret-string "MySecretPassword123"
+```
+
 # Create dev environment
 ```
 gh api --method PUT -H "Accept: application/vnd.github+json" /repos/aalimsee/flask-ecs-xray/environments/dev
@@ -19,3 +25,4 @@ gh secret set AWS_REGION -b"us-east-1" -r aalimsee/flask-ecs-xray --env dev
 gh secret set AWS_ACCOUNT_ID -b"255945442255" -r aalimsee/flask-ecs-xray --env dev
 gh secret set ECR_REPOSITORY -b"aaron-flask-xray-repo" -r aalimsee/flask-ecs-xray --env dev
 ```
+

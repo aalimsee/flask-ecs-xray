@@ -3,7 +3,8 @@
 # Secrets Manager Secret
 
 resource "aws_secretsmanager_secret" "db_password" {
-  name = "aaron/db_password"
+  name                    = "aaron/db_password"
+  recovery_window_in_days = 0
 
   tags = {
     Name = "aaron-db-password"

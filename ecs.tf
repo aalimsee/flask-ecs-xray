@@ -27,14 +27,14 @@ resource "aws_ecs_cluster_capacity_providers" "flask_xray_capacity_providers" {
 
 # Fetch SSM Parameter (for MY_APP_CONFIG)
 data "aws_ssm_parameter" "app_config" {
-  name       = "/aaron/config"
-  depends_on = [aws_ssm_parameter.app_config]
+  name = "/aaron/config"
+  //depends_on = [aws_ssm_parameter.app_config]
 }
 
 # Fetch Secrets Manager Secret (for MY_DB_PASSWORD)
 data "aws_secretsmanager_secret" "db_password" {
-  name       = "aaron/db_password"
-  depends_on = [aws_secretsmanager_secret.db_password]
+  name = "aaron/db_password"
+  //depends_on = [aws_secretsmanager_secret.db_password]
 }
 
 resource "aws_ecs_task_definition" "flask_xray_taskdef" {
